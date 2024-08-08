@@ -1,7 +1,17 @@
+import fs from 'fs';
+import path from 'path';
 import { Database } from 'sqlite3';
 import { dbLogger as logger } from '../utils/logger';
 
-export const db = new Database('sqlite3.db');
+const DB_DIR = 'data';
+const DB_FILE = 'sqlite3.db';
+const dbPath = path.join(DB_DIR, DB_FILE);
+
+if (!fs.existsSync('data')) {
+  fs.mkdirSync('data');
+}
+
+export const db = new Database(dbPath);
 
 db.run(
   `CREATE TABLE IF NOT EXISTS urls (

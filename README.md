@@ -4,6 +4,27 @@ Simple, straightforward, self-hostable link shortener service built on SQLite, E
 
 Loosely inspired by ulvis.net
 
+## Getting Started
+
+### Using docker run
+
+```bash
+docker run -v data:/app/data -p 80:3000 benjammin4dayz/shortlink
+```
+
+### Using docker compose
+
+```yaml
+version: '3.9'
+services:
+  app:
+    image: benjammin4dayz/shortlink
+    ports:
+      - 80:3000
+    volumes:
+      - data:/app/data
+```
+
 ## Shortener API
 
 ### GET /api/v1/shorten?url=`<YOUR_LONG_URL>`
