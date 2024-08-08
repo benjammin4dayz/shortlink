@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="user">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Shortener</title>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/mvp.css" />
+  </head>
+  <body>
+    <main class="container">
+      <form id="form" class="form">
+        <label for="url">URL to shorten</label>
+        <input type="text" id="url" placeholder="https://example.com" />
+        <div id="formControls" class="flex-between">
+          <button type="submit">Shorten</button>
+          <aside id="output" class="output --hidden">
+            <div>Your shortened link:</div>
+            <div id="yourl"></div>
+          </aside>
+        </div>
+      </form>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

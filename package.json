@@ -1,0 +1,42 @@
+{
+  "name": "shortlink",
+  "version": "0.1.0",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benjammin4dayz/shortlink.git"
+  },
+  "author": "benjammin4dayz",
+  "main": "src/app.js",
+  "scripts": {
+    "build": "babel src/ -d dist",
+    "build:image": "bash ./image.sh",
+    "lint": "eslint src/ --report-unused-disable-directives --max-warnings 0",
+    "start": "nodemon --exec babel-node src/app.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "qs": "^6.13.0",
+    "serve-static": "^1.15.0",
+    "sqlite3": "^5.1.7",
+    "tslog": "^4.9.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.24.8",
+    "@babel/core": "^7.25.2",
+    "@babel/node": "^7.25.0",
+    "@babel/preset-env": "^7.25.3",
+    "@eslint/js": "^9.8.0",
+    "@types/sqlite3": "^3.1.11",
+    "eslint": "^9.8.0",
+    "eslint-plugin-n": "^17.10.2",
+    "globals": "^15.9.0",
+    "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "sourceType": "module"
+}
