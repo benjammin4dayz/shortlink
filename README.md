@@ -6,24 +6,49 @@ Loosely inspired by ulvis.net
 
 ## Getting Started
 
-### Using docker run
+After starting the service using one of the methods outlined below, the web UI can be used to start generating shortlinks without writing any code. Simply input the full URL you want to shorten into the form, click the button, and copy the output.
 
-```bash
-docker run -v data:/app/data -p 80:3000 benjammin4dayz/shortlink
-```
+By default, the Express server will run on port `3000` unless `PORT` is specified in the .env file.
 
-### Using docker compose
+### Docker
 
-```yaml
-version: '3.9'
-services:
-  app:
-    image: benjammin4dayz/shortlink
-    ports:
-      - 80:3000
-    volumes:
-      - data:/app/data
-```
+Images are available on [Docker Hub](https://hub.docker.com/r/benjammin4dayz/shortlink/tags)
+
+- **Example using docker run**
+
+  ```bash
+  docker run -v data:/app/data -p 3000:3000 benjammin4dayz/shortlink
+  ```
+
+- **Example using docker compose**
+
+  ```yaml
+  version: '3.9'
+  services:
+    app:
+      image: benjammin4dayz/shortlink
+      ports:
+        - 3000:3000
+      volumes:
+        - data:/app/data
+  ```
+
+### Source
+
+Check the [tags](https://github.com/benjammin4dayz/shortlink/tags) for a specific version
+
+- **Running the development server**
+
+  ```bash
+  npm start
+  ```
+
+- **Building for production**
+
+  ```bash
+  npm run build
+  node dist/app.js
+  ```
 
 ## Shortener API
 
@@ -31,18 +56,12 @@ services:
 
 _Content Type: `text/plain`_
 
-This is the simplest way to interface with the API.
+Postfixing a query string with the `url=` parameter is the simplest way to interact with the API. If the provided URL is valid, a shortlink is returned in plain text. Otherwise, an empty string is returned.
 
-#### Success Response
+**Request Format**
 
-```txt
-<YOUR_SHORT_URL>
-```
-
-#### Failure Response
-
-```txt
-<EMPTY_STRING>
+```js
+fetch('/api/v1/shorten?url=https://example.com').then(res => res.text());
 ```
 
 ### POST /api/v1/shorten
@@ -51,7 +70,7 @@ _Content Type: `application/json`_
 
 This method accepts and returns an object with some more insight for use in your application
 
-#### Request Format
+**Request Format**
 
 ```js
 fetch('/api/v1/shorten', {
@@ -66,7 +85,7 @@ fetch('/api/v1/shorten', {
 }).then(res => res.json());
 ```
 
-#### Success Response
+**Success Response**
 
 ```json
 {
@@ -77,7 +96,7 @@ fetch('/api/v1/shorten', {
 }
 ```
 
-#### Failure Response
+**Failure Response**
 
 ```json
 { "error": "That wasn't supposed to happen!" }
