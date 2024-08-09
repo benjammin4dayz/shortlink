@@ -2,12 +2,12 @@ import cors from 'cors';
 import express from 'express';
 import path from 'path';
 import serveStatic from 'serve-static';
+import { errorHandler, httpRequestLogger } from './middleware';
 import apiRouter from './routes/apiRouter';
 import fallbackRouter from './routes/fallbackRouter';
 import shortlinkRouter from './routes/shortlinkRouter';
 import { PORT } from './utils/env.config';
 import { httpLogger as logger } from './utils/logger';
-import { httpRequestLogger } from './middleware';
 
 const staticServer = serveStatic(path.join(__dirname, '../public'), {
   index: ['index.html'],
@@ -19,6 +19,7 @@ app.use(httpRequestLogger());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(errorHandler());
 
 app.use('/api', apiRouter);
 app.use('/s', shortlinkRouter);
